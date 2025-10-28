@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Registration Form</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    form { max-width: 350px; margin: auto; }
+    input { width: 100%; padding: 8px; margin: 6px 0; border: 2px solid #ccc; border-radius: 4px; }
+    input:invalid { border-color: red; }
+    input:valid { border-color: green; }
+    .error { color: red; font-size: 0.8em; }
+    .success { color: green; margin-top: 10px; }
+  </style>
+</head>
+<body>
+
+  <h2>Registration Form</h2>
+  <form id="form">
+    <input type="text" id="name" placeholder="Full Name" required>
+    <div class="error" id="nameErr"></div>
+
+    <input type="email" id="email" placeholder="Email" required>
+    <div class="error" id="emailErr"></div>
+
+    <input type="password" id="password" placeholder="Password" required minlength="6">
+    <div class="error" id="passErr"></div>
+
+    <input type="tel" id="phone" placeholder="Phone (10 digits)" required>
+    <div class="error" id="phoneErr"></div>
+
+    <button type="submit">Register</button>
+    <div class="success" id="success"></div>
+  </form>
+
+  <script>
+    const form = document.getElementById("form");
+    form.addEventListener("submit", e => {
+      e.preventDefault();
+      let valid = true;
+
+      // Name
+      if(!name.value.trim()){ nameErr.textContent="Enter your name"; valid=false; } 
+      else nameErr.textContent="";
+
+      // Email
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)){ emailErr.textContent="Invalid email"; valid=false; } 
+      else emailErr.textContent="";
+
+      // Password
+      if(!/^(?=.*\d)(?=.*[!@#$%^&*]).{6,}$/.test(password.value)){ passErr.textContent="Min 6 chars, include number & special char"; valid=false; } 
+      else passErr.textContent="";
+
+      // Phone
+      if(!/^\d{10}$/.test(phone.value)){ phoneErr.textContent="Enter 10 digit number"; valid=false; } 
+      else phoneErr.textContent="";
+
+      // Success
+      success.textContent = valid ? "Registration successful!" : "";
+    });
+  </script>
+
+</body>
+</html>
